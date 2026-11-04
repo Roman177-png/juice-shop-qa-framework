@@ -1,0 +1,62 @@
+[project]
+name = "juice-shop-qa-framework"
+version = "0.1.0"
+description = "End-to-end test automation framework for OWASP Juice Shop"
+requires-python = ">=3.12"
+dependencies = [
+    "pytest>=8.3",
+    "pytest-playwright>=0.5",
+    "pydantic>=2.9",
+    "pydantic-settings>=2.5",
+    "axe-playwright-python>=0.1.4",
+    "allure-pytest>=2.13",
+    "pytest-xdist>=3.6",
+    "faker>=30.0",
+    "Pillow>=10.4",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.7",
+    "mypy>=1.11",
+    "pre-commit>=3.8",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-markers"
+markers = [
+    "smoke: fast sanity checks that must always pass",
+    "regression: broader regression coverage",
+    "api: tests exercising the REST API directly",
+    "ui: tests exercising the browser UI",
+    "e2e: full user-journey tests spanning multiple pages",
+    "a11y: accessibility checks via axe-core",
+    "security: security-oriented negative tests",
+    "visual: screenshot-based visual regression tests",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "N", "C4"]
+ignore = ["E501"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["src"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_unused_ignores = true
+warn_return_any = true
+disallow_untyped_defs = true
+plugins = ["pydantic.mypy"]
+exclude = ["^\\.venv/"]
+
+[[tool.mypy.overrides]]
+module = ["axe_playwright_python.*", "faker.*"]
+ignore_missing_imports = true

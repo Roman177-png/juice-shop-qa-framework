@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+allure-results/
+allure-report/
+test-results/
+playwright-report/
+storage_state/
+screenshots/actual/
+screenshots/diff/
+*.egg-info/
