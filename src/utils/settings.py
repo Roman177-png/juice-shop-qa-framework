@@ -8,7 +8,6 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 
     base_url: HttpUrl = HttpUrl("http://localhost:3000")
-    api_url: HttpUrl = HttpUrl("http://localhost:3000/api")
     admin_email: str = "admin@juice-sh.op"
     admin_password: str = "admin123"
 
